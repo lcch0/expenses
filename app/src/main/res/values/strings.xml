@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MyCreditCard</string>
+    <string name="defaultAmount">0</string>
+    <string name="add_expense">Add expense</string>
+</resources>
