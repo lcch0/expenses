@@ -2,11 +2,11 @@ package com.dss.mycreditcard.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.dss.mycreditcard.data.dao.ExpenseDe
+import com.dss.mycreditcard.data.dao.ExpenseDao
 import com.dss.mycreditcard.data.entities.Expense
 import java.util.*
 
-class ExpenseRepo(private val expenseDe: ExpenseDe)
+class ExpenseRepo(private val expenseDao: ExpenseDao)
 {
     private var start = Date()
     private var end = Date()
@@ -16,7 +16,7 @@ class ExpenseRepo(private val expenseDe: ExpenseDe)
     {
         this.start = start
         this.end = end
-        _expenses = expenseDe.getExpensesForPeriodDesc(start.getTime(), end.getTime())
+        _expenses = expenseDao.getExpensesForPeriodAsync(start.time, end.time)
     }
 
     var expenses: LiveData<List<Expense>>
@@ -25,6 +25,8 @@ class ExpenseRepo(private val expenseDe: ExpenseDe)
 
     suspend fun insert(expense: Expense)
     {
-        expenseDe.insert(expense)
+        expenseDao.insert(expense)
     }
+
+
 }

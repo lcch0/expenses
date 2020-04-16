@@ -3,7 +3,8 @@ package com.dss.mycreditcard.data.database
 import android.content.Context
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.dss.mycreditcard.data.dao.ExpenseDe
+import com.dss.mycreditcard.data.dao.ExpenseDao
+import com.dss.mycreditcard.data.dao.SettingsDao
 import com.dss.mycreditcard.data.entities.Expense
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -12,7 +13,8 @@ import java.util.*
 @Database(entities = [Expense::class], version = 1, exportSchema = false)
 abstract class ExpenseDB : RoomDatabase()
 {
-    abstract fun expenseDao(): ExpenseDe
+    abstract fun expenseDao(): ExpenseDao
+    abstract fun settingsDao(): SettingsDao
 
     companion object
     {
@@ -49,7 +51,7 @@ abstract class ExpenseDB : RoomDatabase()
             }
         }
 
-        private suspend fun populateDb(expenseDao: ExpenseDe)
+        private suspend fun populateDb(expenseDao: ExpenseDao)
         {
             //for debug
             expenseDao.deleteAll()
