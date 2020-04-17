@@ -7,17 +7,14 @@ import com.dss.mycreditcard.data.entities.Settings
 interface SettingsDao
 {
     @Query("select * from settings limit 1")
-    fun getSettings(): Settings
-
-    @Insert
-    fun setSettings(settings: Settings)
+    fun get(): Settings?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(settings: Settings): Long
+    fun set(settings: Settings): Long
 
     @Update
     suspend fun update(settings: Settings)
 
     @Query("delete from settings")
-    suspend fun deleteAll()
+    suspend fun delete()
 }

@@ -4,20 +4,29 @@ import android.content.Context
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.dss.mycreditcard.data.dao.ExpenseDao
+import com.dss.mycreditcard.data.dao.SessionDao
 import com.dss.mycreditcard.data.dao.SettingsDao
 import com.dss.mycreditcard.data.entities.Expense
+import com.dss.mycreditcard.data.entities.Session
+import com.dss.mycreditcard.data.entities.Settings
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import java.util.*
 
-@Database(entities = [Expense::class], version = 1, exportSchema = false)
+@Database(entities =
+[
+    Expense::class,
+    Settings::class,
+    Session::class
+], version = 2, exportSchema = false)
 abstract class ExpenseDB : RoomDatabase()
 {
     abstract fun expenseDao(): ExpenseDao
     abstract fun settingsDao(): SettingsDao
+    abstract fun sessionDao(): SessionDao
 
     companion object
     {
+        const val DB_NAME = "expenseDB"
         @Volatile
         private var INSTANCE: ExpenseDB? = null
 
@@ -30,7 +39,7 @@ abstract class ExpenseDB : RoomDatabase()
             synchronized(this){
                 val i = Room.databaseBuilder(
                     context.applicationContext,
-                    ExpenseDB::class.java, "expenseDB")
+                    ExpenseDB::class.java, DB_NAME)
                     .addCallback(ExpenseDBCallback(scope))
                     .build()
                 INSTANCE = i
@@ -46,20 +55,14 @@ abstract class ExpenseDB : RoomDatabase()
             super.onOpen(db)
             INSTANCE?.let {
                 scope.launch {
-                    populateDb(it.expenseDao())
+                    populateDb()
                 }
             }
         }
 
-        private suspend fun populateDb(expenseDao: ExpenseDao)
+        private fun populateDb()
         {
-            //for debug
-            expenseDao.deleteAll()
-
-            var expense = Expense(0, 10f, Date().time)
-            expenseDao.insert(expense)
-            expense = Expense(0, 20f, Date().time)
-            expenseDao.insert(expense)
+            //stub
         }
     }
 }

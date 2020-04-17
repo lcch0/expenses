@@ -11,9 +11,3 @@ data class Settings(@PrimaryKey(autoGenerate = true) val id: Int,
                     var date2: Long = Date().time,
                     var softLimit: Float = 0f,
                     var hardLimit: Float = 0f)
-{
-    fun isEmpty(): Boolean
-    {
-        return periodType == PeriodType.Monthly.value && softLimit == 0f && hardLimit == 0f
-    }
-}

@@ -3,6 +3,7 @@ package com.dss.mycreditcard.data.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.dss.mycreditcard.data.entities.Expense
+import com.dss.mycreditcard.data.entities.Settings
 
 @Dao
 interface ExpenseDao

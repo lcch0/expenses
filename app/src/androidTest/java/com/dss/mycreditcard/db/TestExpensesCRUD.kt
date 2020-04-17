@@ -33,7 +33,7 @@ class TestExpensesCRUD
     }
 
     @Test
-    fun insertExpenseTest()
+    fun insertTest()
     {
         runBlocking {
             val dao =
@@ -47,7 +47,7 @@ class TestExpensesCRUD
     }
 
     @Test
-    fun updateExpenseTest()
+    fun updateTest()
     {
         runBlocking {
             val dao =
@@ -70,7 +70,7 @@ class TestExpensesCRUD
     }
 
     @Test
-    fun deleteExpenseTest()
+    fun deleteTest()
     {
         runBlocking {
             val dao =
@@ -89,7 +89,7 @@ class TestExpensesCRUD
     }
 
     @Test
-    fun getExpenseByPeriodTest()
+    fun getByPeriodTest()
     {
         runBlocking {
             val dao =
@@ -114,7 +114,7 @@ class TestExpensesCRUD
     }
 
     @Test
-    fun getAllExpenseTest()
+    fun getAllTest()
     {
         runBlocking {
             val dao =
